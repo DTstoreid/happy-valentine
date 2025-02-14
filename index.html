@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            padding: 20px;
+        }
+
+        .valentine-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            transform: scale(0);
+            animation: cardEntrance 0.8s ease-out forwards;
+        }
+
+        @keyframes cardEntrance {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff3b6d;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .heart {
+            font-size: 3.5rem;
+            color: #ff3b6d;
+            margin: 1rem 0;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .button {
+            background: #ff3b6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background: #ff1a4f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,59,109,0.3);
+        }
+
+        @media (max-width: 480px) {
+            .valentine-card {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="valentine-card">
+        <h1>Happy Valentine's Day!</h1>
+        <div class="heart">❤️</div>
+        <p>Wishing you a day filled with love, joy, and special moments that make your heart smile. Thank you for being the wonderful person you are!</p>
+        <button class="button" onclick="showLove()">Click for Surprise</button>
+    </div>
+
+    <script>
+        function showLove() {
+            const messages = [
+                "You're amazing!",
+                "You make the world better!",
+                "You're loved more than you know!",
+                "Your smile lights up rooms!",
+                "You're one of a kind!"
+            ];
+            
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+            
+            // Add confetti effect
+            const duration = 3000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                const timeLeft = end - Date.now();
+                
+                if (timeLeft <= 0) return;
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // Since particles fall down, start a bit higher than random
+                confetti({
+                    particleCount,
+                    origin: { 
+                        x: Math.random(),
+                        y: Math.random() * 0.5 - 0.2
+                    },
+                    colors: ['#ff3b6d', '#ff758c', '#ff7eb3']
+                });
+
+                requestAnimationFrame(frame);
+            }());
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</body>
+</html>
